@@ -1,0 +1,33 @@
+<template id="torrents">
+  <br>
+  <div class="">
+      <form class="form-inline" submit.delegate="search()">
+        <button type="button" class="btn btn-default" name="button" click.delegate="fetchRSS()">RSS</button>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" id="search" placeholder="search" value.bind="searchString">
+            <div class="input-group-addon btn btn-default fa fa-search" click.delegate="search()"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  <hr>
+  <div class="results">
+    <table class="table table-striped">
+      <tbody>
+        <tr repeat.for="torrent of torrents" dblclick.delegate="download(torrent)">
+          <td>${torrent.title}</td>
+          <td>${torrent.content}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div if.bind="pages" class="pull-right">
+    <ul class="pagination">
+      <li click.delegate="previous()"><a >&laquo;</a></li>
+      <li repeat.for="page of pages" click.delegate="changePage(page)"><a>${page}</a></li>
+      <li click.delegate="next()"><a >&raquo;</a></li>
+    </ul>
+  </div>
+</template>

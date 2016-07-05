@@ -1,0 +1,55 @@
+<template>
+<require from="components/size-format-value-converter"></require>
+<require from="components/eta-format-value-converter"></require>
+<br>
+<div class="row">
+  <div class="col-md-6 btn-toolbar" role="group">
+    <div class="btn-group">
+      <button class="btn btn-default" click.delegate="add()"><i class="fa fa-folder-open"></i> Add</button>
+      <button class="btn btn-default" click.delegate="remove()"><i class="fa fa-trash"></i> Remove</button>
+    </div>
+      <div class="btn-group">
+        <button class="btn btn-default" click.delegate="start()"><i class="fa fa-play"></i> Start</button>
+        <button class="btn btn-default" click.delegate="pause()"><i class="fa fa-pause"></i> Pause</button>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-default" click.delegate="start('all')"><i class="fa fa-play"></i> Start All</button>
+        <button class="btn btn-default" click.delegate="pause('all')"><i class="fa fa-pause"></i> Pause All</button>
+      </div>
+
+  </div>
+  <div class="col-md-6  pull-right">
+    <div class="col-md-6  pull-right">
+      <select class="form-control" name="filter" value.bind="filterValue">
+        <option value="-1">All</option>
+        <option repeat.for="key of statusKeys" value="${transmission.status[key]}">${key}</option>
+      </select>
+    </div>
+    <div class="col-md-6 pull-right">
+      <input class="form-control" type="text" name="name" value.bind="search & debounce:300" placeholder="search"/>
+    </div>
+  </div>
+</div>
+<br>
+<div if.bind="!torrentList">
+<div class="well well-lg"><i class="fa fa-spin fa-pulse fa-5x fa-refresh "></i> Loading</div>
+</div>
+<div if.bind="torrentList">
+  <table class="table table-striped table-hover">
+  <tr repeat.for="torrent of torrentList" click.delegate ="rowSelect(torrent.id)" class="${(isSelected(torrent.id) ? 'selected':'')}">
+    <td>
+      <div>${torrent.name} <span>(${torrent.rateDownload|sizeFormat}/s) (Seeds: ${torrent.peersSendingToUs}, Leech: ${torrent.peersGettingFromUs})</span></div>
+        <div class="progress">
+          <div class="progress-bar ${getStatusType(torrent)}" role="progressbar" css="width: ${getPercentage(torrent)}%" aria-valuenow="${torrent.totalSize - torrent.leftUntilDone}" aria-valuemin="0" aria-valuemax="${torrent.sizeWhenDone}">
+        </div>
+      </div>
+      <div if.bind="torrent.error != 0">
+        ${torrent.errorString}
+      </div>
+      <div if.bind="torrent.metadataPercentComplete !=1">Downloading Meta ${torrent.metadataPercentComplete} </div>
+      <div if.bind="torrent.metadataPercentComplete ==1">${(torrent.totalSize - torrent.leftUntilDone)| sizeFormat}/${torrent.totalSize | sizeFormat} , uploaded ${torrent.uploadedEver | sizeFormat} (Ratio ${torrent.uploadRatio}) ${torrent.eta ==-1 ? "": torrent.eta ==-2 ? " - remaining time unknown": torrent.eta|etaFormat }</div>
+    </td>
+  </tr>
+</table>
+</div>
+</template>
