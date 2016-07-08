@@ -6,7 +6,8 @@ export class DownloadDialog {
     this.controller = controller;
     this.model= {};
   }
-  fileSelected(file) {
-    this.file =file;
+  fileSelected(model) {
+    this.file =model.file;
+    this.status = model.status;
 }
 }

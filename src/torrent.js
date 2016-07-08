@@ -1,11 +1,14 @@
 
 import {inject} from 'aurelia-framework';
 import {HttpClient as XHRClient} from 'aurelia-http-client';
+import {DialogService} from 'aurelia-dialog';
+import {DownloadDialog} from './download-dialog';
 
-@inject(XHRClient)
+@inject(XHRClient,DialogService)
 export class Torrent {
   constructor(xhr) {
     this.xhr = xhr;
+    this.dialogService = dialogService;
     this.page=0;
   }
 
@@ -43,6 +46,11 @@ previous(){
     this.xhr.createRequest('/rest/torrent/download')
     .withContent({url: link})
     .asPost()
-    .send().catch(x =>{console.log(x);}).then(x=>{console.log(x.content);})
+    .send().catch(x =>{makePopup(file,"danger")}).then(x=>{makePopup(x.content,"success")})
+  }
+
+  makePopup(file,status){
+    this.dialogService.open({ viewModel: DownloadDialog, model:{file:file,status:status}}});
+    setTimeout(x =>{this.dialogService.close()},1000);
   }
 }
