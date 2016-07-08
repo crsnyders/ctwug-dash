@@ -5,6 +5,8 @@ var request = require('request');
 var Promise = require('promise');
 var findPage = "page=";
 var findName = "name=";
+var urlBase = "http://torrents.ctwug.za.net/torrents-search.php?search=";
+//var urlBase = "http://127.0.0.1:8080/torrents/torrents-search.php?search=";
 Array.prototype.unique = function()
 {
         var n = {},r=[];
@@ -100,14 +102,19 @@ function tableResultClean (result) {
   result.pages = pages;
   return result;
 }
-function search(searchString,jar, page){
-  page = _.isNumber(page) ? page : 1;
+function search(searchString, jar, page, body) {
+  page = _.isNumber(page) ? page : 0;
   var options = {
-          uri : "http://torrents.ctwug.za.net/torrents-search.php?search="+encodeURIComponent(searchString)+"&page="+page+"&cat=0&incldead=0&freeleech=0&lang=0",
-          jar : jar,
-          method : 'GET'
-        };
-  return runSearch(options);
+    uri: urlBase + encodeURIComponent(searchString) + "&page=" + page + "&cat=0&incldead=0&freeleech=0&lang=0",
+    jar: jar,
+    method: 'GET'
+  };
+  if (body) {
+    retunr
+    return runSearchHtml(options);
+  } else {
+    return runSearch(options);
+  }
 }
 function searchUrl(searchURL,jar){
   var options = {
@@ -117,17 +124,8 @@ function searchUrl(searchURL,jar){
         };
   return runSearch(options);
 }
-function searchHtml(searchString,jar, page){
-  page = _.isNumber(page) ? page : 1;
-  var options = {
-          uri : "http://torrents.ctwug.za.net/torrents-search.php?search="+encodeURIComponent(searchString)+"&page="+page+"&cat=0&incldead=0&freeleech=0&lang=0",
-          jar : jar,
-          method : 'GET'
-        };
-        return runSearchHtml(options);
-}
-function runSearchHtml(options){
 
+function runSearchHtml(options){
   var promise  = new Promise(function(resolve,reject){
     request(options,function (error, response, body){
             var prom = runSearchOnString(body)
@@ -153,4 +151,4 @@ function runSearch(options){
   return promise
 }
 
-module.exports = {search: search,searchUrl:searchUrl,searchHtml:searchHtml};
+module.exports = {search: search,searchUrl:searchUrl};
