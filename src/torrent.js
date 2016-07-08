@@ -46,7 +46,7 @@ previous(){
     this.xhr.createRequest('/rest/torrent/download')
     .withContent({url: link})
     .asPost()
-    .send().catch(x =>{makePopup(file,"danger")}).then(x=>{makePopup(x.content,"success")})
+    .send().catch(x =>{this,makePopup(file,"danger")}).then(x=>{this.makePopup(x.content,"success")})
   }
 
   makePopup(file,status){
