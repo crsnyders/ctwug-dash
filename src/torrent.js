@@ -6,7 +6,7 @@ import {HttpClient as XHRClient} from 'aurelia-http-client';
 export class Torrent {
   constructor(xhr) {
     this.xhr = xhr;
-    this.page=1;
+    this.page=0;
   }
 
 next(){
