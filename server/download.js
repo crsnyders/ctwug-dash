@@ -11,6 +11,7 @@ var download = function(url, jar,path) {
     }
     var r = request({uri:url,jar:jar});
     r.on('response',  function (res) {
+      try{
       var filename = regexp.exec( res.headers['content-disposition'])[1];
       console.log('starting file writing',path+filename);
       res.pipe(fs.createWriteStream(path+filename));
@@ -21,7 +22,11 @@ var download = function(url, jar,path) {
       res.on('error',function(err){
         reject(err)
       })
-    });
+    }catch(exception){
+      reject("Could not get filename")
+    }
+  }
+  );
     r.on('error',function(err){
       reject(err)
     })

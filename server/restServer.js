@@ -26,7 +26,7 @@ server.get('/torrent/rss', function (req, res, next) {
 server.post('/torrent/search', function (req, res, next){
 ttlogin.TTLogin().then(function(jar){
   sessionJar = jar;
-    search.search(req.params.searchString,sessionJar,req.params.page).then(function(result){
+    search.searchHtml(req.params.searchString,sessionJar,req.params.page).then(function(result){
       res.send(result)
     }).catch(function(error){
       res.send(500,error)
