@@ -8,4 +8,4 @@ build/reports
 coverage
 test/e2e/dist
 eiskaltdcpp
-**config.js
+server/config.js

@@ -40,11 +40,6 @@ previous(){
 
   download(torrent){
     var link = torrent.link;
-    var indexOfPassKey = link.indexOf('&passkey=');
-    if(indexOfPassKey != -1){
-    link = link.substring(0,indexOfPassKey)
-    }
-
     this.xhr.createRequest('http://127.0.0.1:8080/rest/torrent/download')
     .withContent({url: link})
     .asPost()

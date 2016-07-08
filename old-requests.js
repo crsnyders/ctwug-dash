@@ -1,5 +1,5 @@
 
-export class Requests {
+export class OldRequests {
 	constructor() {
 
 	}

@@ -6,6 +6,9 @@ var regexp = /filename=(.*)/gi;
 var download = function(url, jar,path) {
   console.log('Downloading file '+path+' from url '+url);
   var promise = new Promise(function (resolve, reject){
+    if(url.indexOf("passkey") !=-1){
+      jar =null;
+    }
     var r = request({uri:url,jar:jar});
     r.on('response',  function (res) {
       var filename = regexp.exec( res.headers['content-disposition'])[1];

@@ -1,22 +1,17 @@
 {
-  "name": "aurelia-skeleton-navigation",
-  "version": "1.0.0-beta.1.2.6",
-  "description": "A starter kit for building a standard navigation-style app with Aurelia.",
+  "name": "CTWUG-DASH",
+  "version": "1.0.0",
+  "description": "Basic page to interact with eiskaltdcpp and transmission",
   "keywords": [
     "aurelia",
-    "navigation",
-    "skeleton"
+    "ctwug"
   ],
-  "homepage": "http://aurelia.io",
-  "bugs": {
-    "url": "https://github.com/aurelia/skeleton-navigation/issues"
-  },
-  "license": "CC0-1.0",
-  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "homepage": "https://github.com/crsnyders/ctwug-dash",
+  "author": "Chris Snyders <crsnyders@gmail.com>",
   "main": "dist/main.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/aurelia/skeleton-navigation"
+    "url": "https://github.com/crsnyders/ctwug-dash"
   },
   "scripts": {
     "test": "gulp test",
@@ -87,8 +82,7 @@
       "javascript-natural-sort": "npm:javascript-natural-sort@^0.7.1",
       "jquery": "npm:jquery@^2.2.3",
       "lodash": "npm:lodash@^4.13.1",
-      "text": "github:systemjs/plugin-text@^0.0.3",
-      "transmission": "npm:transmission@^0.4.5"
+      "text": "github:systemjs/plugin-text@^0.0.3"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
