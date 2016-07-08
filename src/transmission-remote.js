@@ -10,7 +10,7 @@ import {AddTorrentDialog} from './add-torrent-dialog';
 export class TransmissionRemote {
 
 constructor(xhr,dialogService) {
-  this.url = 'http://127.0.0.1:8080/rest/transmission/';
+  this.url = '/rest/transmission/';
   this.xhr = xhr;
 
   this.dialogService = dialogService;

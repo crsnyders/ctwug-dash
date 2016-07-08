@@ -24,7 +24,7 @@ previous(){
 
   search(){
     this.pages=undefined;
-    this.xhr.createRequest('http://127.0.0.1:8080/rest/torrent/search')
+    this.xhr.createRequest('/rest/torrent/search')
     .withContent({searchString: this.searchString,page:this.page})
     .asPost()
     .send().catch(x =>{console.log(x);}).then(x=>{this.torrents = x.content.torrents;this.pages = x.content.pages;})
@@ -33,14 +33,14 @@ previous(){
   fetchRSS(){
     this.pages=undefined;
     this.page=undefined;
-    this.xhr.createRequest('http://127.0.0.1:8080/rest/torrent/rss')
+    this.xhr.createRequest('/rest/torrent/rss')
     .asGet()
     .send().catch(x =>{console.log(x);}).then(x=>{this.torrents = x.content;})
   }
 
   download(torrent){
     var link = torrent.link;
-    this.xhr.createRequest('http://127.0.0.1:8080/rest/torrent/download')
+    this.xhr.createRequest('/rest/torrent/download')
     .withContent({url: link})
     .asPost()
     .send().catch(x =>{console.log(x);}).then(x=>{console.log(x.content);})

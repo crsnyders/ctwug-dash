@@ -6,7 +6,7 @@ import _ from 'lodash';
 export class Eiskaltdcpp {
 
   constructor(xhr) {
-    this.url = 'http://127.0.0.1:8080/rest/dc/';
+    this.url = '/rest/dc/';
     this.xhr = xhr;
 
 
