@@ -2,6 +2,7 @@ var config = require('./config.js')
 var htmlToJson  = require('html-to-json');
 var _ = require("lodash")
 var request = require('request');
+var Promise = require('promise');
 var findPage = "page=";
 var findName = "name=";
 Array.prototype.unique = function()
@@ -116,7 +117,16 @@ function searchUrl(searchURL,jar){
         };
   return runSearch(options);
 }
-function searchHtml(options){
+function searchHtml(){
+  page = _.isNumber(page) ? page : 1;
+  var options = {
+          uri : "http://torrents.ctwug.za.net/torrents-search.php?search="+encodeURIComponent(searchString)+"&page="+page+"&cat=0&incldead=0&freeleech=0&lang=0",
+          jar : jar,
+          method : 'GET'
+        };
+        return runSearchHtml(options);
+}
+function runSearchHtml(options){
 
   var promise  = new Promise(function(resolve,reject){
     request(options,function (error, response, body){
