@@ -6,7 +6,7 @@ import {DownloadDialog} from './download-dialog';
 
 @inject(XHRClient,DialogService)
 export class Torrent {
-  constructor(xhr) {
+  constructor(xhr,dialogService) {
     this.xhr = xhr;
     this.dialogService = dialogService;
     this.page=0;
