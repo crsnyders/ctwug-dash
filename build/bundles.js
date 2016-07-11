@@ -17,7 +17,6 @@ module.exports = {
       "includes": [
         "aurelia-framework",
         "aurelia-bootstrapper",
-        "aurelia-dialog",
         "aurelia-fetch-client",
         "aurelia-router",
         "aurelia-animator-css",
