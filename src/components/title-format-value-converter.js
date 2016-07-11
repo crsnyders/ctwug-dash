@@ -1,6 +1,6 @@
 export class TitleFormatValueConverter {
 
     toView(name) {
-    return return name.replace(/\./g, ' ');
+      return name.replace(/\./g, ' ');
     }
 }
