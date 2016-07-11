@@ -51,6 +51,5 @@ previous(){
 
   makePopup(file,status){
     this.dialogService.open({ viewModel: DownloadDialog, model:{file:file,status:status}});
-    setTimeout(x =>{this.dialogService.close()},1000);
   }
 }
