@@ -1,6 +1,7 @@
 <template>
 <require from="components/size-format-value-converter"></require>
 <require from="components/eta-format-value-converter"></require>
+<require from="components/title-format-value-converter"></require>
 <br>
 <div class="row">
   <div class="col-md-6 btn-toolbar" role="group">
@@ -38,7 +39,7 @@
   <table class="table table-striped table-hover">
   <tr repeat.for="torrent of torrentList" click.delegate ="rowSelect(torrent.id)" class="${(isSelected(torrent.id) ? 'selected':'')}">
     <td>
-      <div>${torrent.name} <span>(${torrent.rateDownload|sizeFormat}/s) (Seeds: ${torrent.peersSendingToUs}, Leech: ${torrent.peersGettingFromUs})</span></div>
+      <div>${torrent.name | titleFormat} <span>(${torrent.rateDownload|sizeFormat}/s) (Seeds: ${torrent.peersSendingToUs}, Leech: ${torrent.peersGettingFromUs})</span></div>
         <div class="progress">
           <div class="progress-bar ${getStatusType(torrent)}" role="progressbar" css="width: ${getPercentage(torrent)}%" aria-valuenow="${torrent.totalSize - torrent.leftUntilDone}" aria-valuemin="0" aria-valuemax="${torrent.sizeWhenDone}">
         </div>
