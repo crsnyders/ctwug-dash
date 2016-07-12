@@ -2,6 +2,7 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient as XHRClient} from 'aurelia-http-client';
 import $ from  "jquery";
+import _ from "lodash";
 
 @inject(XHRClient)
 export class Torrent {
@@ -28,7 +29,7 @@ previous(){
     this.xhr.createRequest('/rest/torrent/search')
     .withContent({searchString: this.searchString,page:this.page})
     .asPost()
-    .send().catch(x =>{console.log(x);}).then(x=>{this.torrents = x.content.torrents;this.pages = x.content.pages;})
+    .send().catch(x =>{console.log(x);}).then(x=>{this.torrents = _.get(x,'content.torrents',[]);this.pages = _.get(x,'content.pages');})
   }
 
   fetchRSS(){
@@ -36,7 +37,7 @@ previous(){
     this.page=undefined;
     this.xhr.createRequest('/rest/torrent/rss')
     .asGet()
-    .send().catch(x =>{console.log(x);}).then(x=>{this.torrents = x.content;})
+    .send().catch(x =>{console.log(x);}).then(x=>{this.torrents = _.get(x,'content');})
   }
 
   download(torrent){
@@ -44,7 +45,7 @@ previous(){
     this.xhr.createRequest('/rest/torrent/download')
     .withContent({url: link})
     .asPost()
-    .send().catch(x =>{this,makePopup(file,"danger")}).then(x=>{this.makePopup(x.content,"success")})
+    .send().catch(x =>{this.makePopup(file,"danger")}).then(x=>{this.makePopup(x.content,"success")})
   }
 
   makePopup(file,status){
