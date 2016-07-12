@@ -80,7 +80,7 @@ addTorrent(){
     var index = contents.indexOf(key);
     if (index > -1) {
       var metainfo = contents.substring (index + key.length);
-      var query = this.doQuery('torrent/addBase64',{fileb64:metainfo});
+      var query = this.doQuery('torrents/addBase64',{fileb64:metainfo});
       console.log(query);
       query.then((x)=>{console.log(x);this.refreshList()});
       }
