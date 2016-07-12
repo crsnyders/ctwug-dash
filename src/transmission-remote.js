@@ -74,8 +74,8 @@ add(){
 
 }
 addTorrent(){
-  if (_.get(model,'file')) {
-    var contents = _.get(model,'file');
+  if (_.get(this.model,'file')) {
+    var contents = _.get(this.model,'file');
     var key = "base64,"
     var index = contents.indexOf (key);
     if (index > -1) {

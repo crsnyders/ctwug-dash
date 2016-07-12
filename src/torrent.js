@@ -1,14 +1,12 @@
 
 import {inject} from 'aurelia-framework';
 import {HttpClient as XHRClient} from 'aurelia-http-client';
-import {DialogService} from 'aurelia-dialog';
-import {DownloadDialog} from './download-dialog';
+import $ from  "jquery";
 
-@inject(XHRClient,DialogService)
+@inject(XHRClient)
 export class Torrent {
-  constructor(xhr,dialogService) {
+  constructor(xhr) {
     this.xhr = xhr;
-    this.dialogService = dialogService;
     this.page=0;
   }
 
@@ -50,6 +48,9 @@ previous(){
   }
 
   makePopup(file,status){
-    this.dialogService.open({ viewModel: DownloadDialog, model:{file:file,status:status}});
+    this.model.file = file;
+    this.model.status = status;
+    $('#downloadDialog').modal('show');
+    setTimeout(x=>{$('#downloadDialog').modal('hide');this.model ={}},500);
   }
 }
