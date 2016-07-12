@@ -77,10 +77,12 @@ addTorrent(){
   if (_.get(this.model,'file')) {
     var contents = _.get(this.model,'file');
     var key = "base64,"
-    var index = contents.indexOf (key);
+    var index = contents.indexOf(key);
     if (index > -1) {
       var metainfo = contents.substring (index + key.length);
-      this.doQuery('torrent/addBase64',{fileb64:metainfo}).then((x)=>{console.log(x);this.refreshList()});
+      var query = this.doQuery('torrent/addBase64',{fileb64:metainfo});
+      console.log(query);
+      query.then((x)=>{console.log(x);this.refreshList()});
       }
     }
     this.dismissModal('addTorrent')

@@ -53,6 +53,6 @@ previous(){
     this.model.file = file;
     this.model.status = status;
     $('#downloadDialog').modal('show');
-    setTimeout(x=>{$('#downloadDialog').modal('hide');this.model ={}},500);
+    setTimeout(x=>{$('#downloadDialog').modal('hide');this.model ={}},1000);
   }
 }
