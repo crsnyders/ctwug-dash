@@ -69,7 +69,7 @@ doQuery(path,query){
 
 add(){
   console.log("add new torrent");
-  this.removeDismiss('addTorrent');
+  this.dismissModal('addTorrent');
   $('#addTorrent').modal("show")
 
 }
