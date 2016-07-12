@@ -4,6 +4,7 @@ import {HttpClient as XHRClient} from 'aurelia-http-client';
 import {DialogService} from 'aurelia-dialog';
 import {RemoveTorrentConfirm} from './remove-torrent-confirm';
 import {AddTorrentDialog} from './add-torrent-dialog';
+import $ from "jquery";
 
 
 @inject(XHRClient,DialogService)
@@ -16,6 +17,7 @@ constructor(xhr,dialogService) {
   this.dialogService = dialogService;
   this.filterValue = -1;
   this.selectedIds =  [];
+  this.model = {};
   setInterval(x=> {
             this.refreshList();
         }, 5000)
@@ -87,13 +89,19 @@ add(){
 }
 
 remove(){
+  this.model.torrents = _.filter(this.torrents,x=>{return _.indexOf(this.selectedIds,x.id) != -1})
+  $('#removeTorrent').modal("show")
+}
+
+removeTorrents(){
   console.log("remove torrent");
-  var toRemove = _.filter(this.torrents,x=>{return _.indexOf(this.selectedIds,x.id) != -1})
-  this.dialogService.open({ viewModel: RemoveTorrentConfirm, model:toRemove}).then(response => {
-      if (!response.wasCancelled) {
-        this.doQuery('torrents/remove',{ids:this.selectedIds,del:_.get(response,'output.removeData',false)}).then((y)=>{console.log(y);this.selectedIds =[];this.refreshList();})
-      }
-    });
+  this.doQuery('torrents/remove',{ids:this.selectedIds,del:_.get(this.model,'removeData',false)}).then((y)=>{console.log(y);this.selectedIds =[];this.refreshList();})
+  this.removeDismiss();
+}
+
+removeDismiss(){
+  this.model = {};
+  $('#removeTorrent').modal("hide")
 }
 isSelected(id){
   return _.indexOf(this.selectedIds,id) != -1;
