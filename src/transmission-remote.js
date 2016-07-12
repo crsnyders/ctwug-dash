@@ -8,7 +8,7 @@ import $ from "jquery";
 @inject(XHRClient)
 export class TransmissionRemote {
 
-constructor(xhr,dialogService) {
+constructor(xhr) {
   this.url = '/rest/transmission/';
   this.xhr = xhr;
 
