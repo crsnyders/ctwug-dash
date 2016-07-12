@@ -9,6 +9,7 @@ export class Torrent {
   constructor(xhr) {
     this.xhr = xhr;
     this.page=0;
+    this.model = {};
   }
 
 next(){

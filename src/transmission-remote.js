@@ -81,9 +81,9 @@ addTorrent(){
     if (index > -1) {
       var metainfo = contents.substring (index + key.length);
       this.doQuery('torrent/addBase64',{fileb64:metainfo}).then((x)=>{console.log(x);this.refreshList()});
-      };
-      this.dismissModal('addTorrent')
-  }
+      }
+    }
+    this.dismissModal('addTorrent')
 }
 fileSelected(fileevent) {
   let reader = new FileReader();
