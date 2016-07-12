@@ -1,20 +1,17 @@
 import {inject,computedFrom} from 'aurelia-framework';
 import _ from 'lodash';
 import {HttpClient as XHRClient} from 'aurelia-http-client';
-import {DialogService} from 'aurelia-dialog';
-import {RemoveTorrentConfirm} from './remove-torrent-confirm';
-import {AddTorrentDialog} from './add-torrent-dialog';
+
 import $ from "jquery";
 
 
-@inject(XHRClient,DialogService)
+@inject(XHRClient)
 export class TransmissionRemote {
 
 constructor(xhr,dialogService) {
   this.url = '/rest/transmission/';
   this.xhr = xhr;
 
-  this.dialogService = dialogService;
   this.filterValue = -1;
   this.selectedIds =  [];
   this.model = {};
@@ -72,23 +69,34 @@ doQuery(path,query){
 
 add(){
   console.log("add new torrent");
-  this.dialogService.open({ viewModel: AddTorrentDialog}).then(response => {
-      if (!response.wasCancelled) {
-        if (_.get(response,'output.file')) {
-          var contents = _.get(response,'output.file');
-					var key = "base64,"
-					var index = contents.indexOf (key);
-					if (index > -1) {
-						var metainfo = contents.substring (index + key.length);
-            this.doQuery('torrent/addBase64',{fileb64:metainfo}).then((x)=>{console.log(x);this.refreshList()});
-						};
+  this.removeDismiss('addTorrent');
+  $('#addTorrent').modal("show")
 
-        }
-      }
-    });
+}
+addTorrent(){
+  if (_.get(model,'file')) {
+    var contents = _.get(model,'file');
+    var key = "base64,"
+    var index = contents.indexOf (key);
+    if (index > -1) {
+      var metainfo = contents.substring (index + key.length);
+      this.doQuery('torrent/addBase64',{fileb64:metainfo}).then((x)=>{console.log(x);this.refreshList()});
+      };
+      this.dismissModal('addTorrent')
+  }
+}
+fileSelected(fileevent) {
+  let reader = new FileReader();
+
+  let file = fileevent.target.files[0];
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+      this.model.file = reader.result;
+  };
 }
 
 remove(){
+  this.dismissModal('removeTorrent');
   this.model.torrents = _.filter(this.torrents,x=>{return _.indexOf(this.selectedIds,x.id) != -1})
   $('#removeTorrent').modal("show")
 }
@@ -96,12 +104,12 @@ remove(){
 removeTorrents(){
   console.log("remove torrent");
   this.doQuery('torrents/remove',{ids:this.selectedIds,del:_.get(this.model,'removeData',false)}).then((y)=>{console.log(y);this.selectedIds =[];this.refreshList();})
-  this.removeDismiss();
+  this.dismissModal('removeTorrent');
 }
 
-removeDismiss(){
+dismissModal(modalId){
   this.model = {};
-  $('#removeTorrent').modal("hide")
+  $('#'+modalId).modal("hide")
 }
 isSelected(id){
   return _.indexOf(this.selectedIds,id) != -1;
