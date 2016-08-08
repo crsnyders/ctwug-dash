@@ -44,7 +44,7 @@ function runSearch(options) {
       if (!error) {
         var $ = cheerio.load(body);
         var torrents = extractTorrentInfo($);
-        var pages = extractPages()
+        var pages = extractPages($)
         resolve({
           "torrents": torrents,
           "pages": pages
