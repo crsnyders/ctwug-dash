@@ -91,7 +91,7 @@ function extractTorrentInfo($) {
           torrent.title = $("[title]", child).first().attr('title');
           break;
         case 2:
-          torrent.link = $('a', child).first().attr('href');
+          torrent.link = 'http://torrents.ctwug.za.net/'+$('a', child).first().attr('href');
           break;
         case 3:
           torrent.uploader = child.text()
