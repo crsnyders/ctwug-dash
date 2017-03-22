@@ -26,7 +26,7 @@
 
   </div>
   <div role="tabpanel" class="tab-pane active" id="queue">
-    <div class="">
+    <div class="table-responsive">
       <table class="table table-striped">
         <tbody>
           <tr repeat.for="queueItem of queuList">
@@ -34,7 +34,6 @@
             <td>${queueItem.Downloaded}</td>
             <td>${queueItem.Status}</td>
             <td>${queueItem.Users}</td>
-
           </tr>
         </tbody>
       </table>
