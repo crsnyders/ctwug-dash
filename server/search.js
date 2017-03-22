@@ -20,7 +20,7 @@ Array.prototype.unique = function() {
 }
 
 function search(searchString, jar, page) {
-  page = _.isNumber(page) ? page : 0;
+  page = _.isNumber(Number.parseInt(page)) ? page : 0;
   var options = {
     uri: urlBase + encodeURIComponent(searchString) + "&page=" + page + "&cat=0&incldead=0&freeleech=0&lang=0",
     jar: jar,
