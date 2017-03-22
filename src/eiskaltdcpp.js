@@ -8,6 +8,7 @@ export class Eiskaltdcpp {
   constructor(xhr) {
     this.url = '/rest/dc/';
     this.xhr = xhr;
+    this.fileListMap = new Map();
 
 
     setInterval(x=> {
@@ -84,11 +85,42 @@ export class Eiskaltdcpp {
     this.doQuery('queue/list').then(x=>{this.queuList = _.values(x.content.result);});
   }
 
-download(item){
-  console.log('Download',item);
-  $(this.contexMenue).collapse('hide');
-  this.addMagnet(item.TTH,item['Real Size'],item.Filename)
-}
+  getFileLists(){
+    this.doQuery('list/local').then(x=>{this.fileLists = x.content.result.split(',');
+      console.log(this.fileLists)
+    });
+
+    this.doQuery('list/listopened').then(x=>{this.opened = x.content.result.split(',');
+      console.log(this.opened)
+    });
+  }
+
+  toggleOpen(filelist){
+    this.doQuery('list/open').then(x=>{this.opened = x.content.result.split(',');
+      console.log(this.opened)
+    });
+    this.doQuery('list/close').then(x=>{this.opened = x.content.result.split(',');
+      console.log(this.opened)
+    });
+  }
+
+  getFileList(nick){
+    this.doQuery('list/download',{'nick':nick}).then(x=>{console.log(x.content);});
+  }
+
+  openFileList(fileList, directory){
+    if(!directory){
+      directory = '';
+    }
+    this.doQuery('list/lsdir',{'filelist':fileList,'directory':directory}).then(x=>{console.log(x.content);});
+  }
+
+
+  download(item){
+    console.log('Download',item);
+    $(this.contexMenue).collapse('hide');
+    this.addMagnet(item.TTH,item['Real Size'],item.Filename)
+  }
   addMagnet(tth,realsize,filename){
     var magnet  = this.makeMagnet(tth,realsize,filename)
     this.doQuery('magnet/add',{'magnet':magnet}).then(x=>{console.log(x.content);});

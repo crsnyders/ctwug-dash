@@ -7,6 +7,7 @@
    <li role="presentation" ><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab">Chat</a></li>
    <li role="presentation" class="active"><a href="#search" aria-controls="search" role="tab" data-toggle="tab">Search</a></li>
    <li role="presentation"><a href="#queue" aria-controls="queue" role="tab" data-toggle="tab">Queue</a></li>
+      <li role="presentation"><a href="#file-lists" aria-controls="file-lists" role="tab" data-toggle="tab">fileLists</a></li>
    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
  </ul>
  <div class="tab-content">
@@ -22,7 +23,10 @@
       <button type="button" class="btn btn-default" name="button" click.delegate="clear()">Clear Search</button>
     </div>
 <hr>
-<aurelia-table table-config.bind="resultConfig" aurelia-table.ref="resultTable" ></aurelia-table>
+<div class="table-responsive">
+  <aurelia-table table-config.bind="resultConfig" aurelia-table.ref="resultTable" ></aurelia-table>
+</div>
+
 
   </div>
   <div role="tabpanel" class="tab-pane active" id="queue">
@@ -37,6 +41,22 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane active" id="file-lists">
+    <div class="table-responsive">
+      <form class="form-inline" >
+        <div class="form-group">
+          <label for="nick">nick</label>
+          <input type="text" class="form-control" id="nick" placeholder="Mamemos" value.bind="nick">
+        </div>
+        <button type="button" class="btn btn-default" click.delegate="getFileList(nick)">get</button>
+      </form>
+      <button type="button"  class="btn btn-primary" name="button" click.delegate="getFileLists()">refresh</button>
+
+      <ul>
+        <li repeat.for="filelist of fileLists" click.delegate="openFileList(filelist)"><a>${filelist}</a></li>
+      </ul>
     </div>
   </div>
 </div>
