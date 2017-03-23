@@ -56,10 +56,12 @@
         <button type="button" class="btn btn-primary" name="button" click.delegate="getFileLists()">refresh</button>
 
         <ul>
-          <li repeat.for="[filelist, options] of fileListMap" click.delegate="openFileList(filelist)">
-            <a>${filelist} </a>
-            <span class="glyphicon ${options.opened ? 'glyphicon-folder-open' : 'glyphicon-folder-close'}" click.delegate="toggleOpen(filelist)"></span>
-
+          <li repeat.for="[filelist, options] of fileListMap" >
+            <a click.delegate="openFileList(filelist)">${filelist} </a>
+            
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon ${options.opened ? 'glyphicon-folder-open' : 'glyphicon-folder-close'}" aria-hidden="true" click.delegate="toggleOpen(filelist)"></span>
+            </button>
           </li>
         </ul>
         <div id="jstree_demo_div"></div>
