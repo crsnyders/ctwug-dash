@@ -220,13 +220,13 @@ Eiskaltdcpp.prototype.listLsDir = function (filelist,directory) {
   return this.doQuery(method,params)
 };
 //optional downloadto
-Eiskaltdcpp.prototype.listDownloadFile = function (filelist,downloadto) {
+Eiskaltdcpp.prototype.listDownloadFile = function (target,filelist,downloadto) {
 var method = 'list.downloadfile';
 var params = {'target':target,'filelist':filelist,'downloadto':downloadto}
 return this.doQuery(method,params)
 };
 //optional downloadto
-Eiskaltdcpp.prototype.listDownloadDir = function (filelist,downloadto) {
+Eiskaltdcpp.prototype.listDownloadDir = function (target,filelist,downloadto) {
 var method = 'list.downloaddir';
 var params = {'target':target,'filelist':filelist,'downloadto':downloadto}
 return this.doQuery(method,params)
@@ -418,10 +418,10 @@ Eiskaltdcpp.prototype.methods = function(method, action, params){
       return this.listLsDir(params['filelist'], params['directory'])
     }
     case 'downloadfile': {
-      return this.listDownloadFile(params['filelist'], params['downloadto'])
+      return this.listDownloadFile(params['target'],params['filelist'],params['filelist'], params['downloadto'])
     }
     case 'downloaddir': {
-      return this.listDownloadDir(params['filelist'], params['downloadto'])
+      return this.listDownloadDir(params['target'],params['filelist'], params['downloadto'])
     }
   }
   }
