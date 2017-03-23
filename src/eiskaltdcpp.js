@@ -186,11 +186,13 @@ export class Eiskaltdcpp {
     $('#jstree_demo_div').jstree({
       'core': {
         'data': (obj, callback) => {
-          console.log(obj, (obj.parent == null ? undefined : obj.id + "\\"));
-          this.readDirFromFileList(fileList, obj.parent == null ? undefined : obj.id + "\\")
+          var target = this.buildTarget(obj.id,obj.parents);
+
+          console.log(obj, target);
+          this.readDirFromFileList(fileList, obj.parent == null ? undefined : target + "\\")
             .then(items => {
             for (var i = 0; i < items.length; i++) {
-              items[i].id = (obj.text ? obj.text + "\\" : '') + items[i].text;
+              items[i].id =items[i].text;
             }
             console.log(items);
             callback.call(this, items)
@@ -207,7 +209,7 @@ export class Eiskaltdcpp {
         "wholerow"
       ],
       "contextmenu": {
-        "items": function($node) {
+        "items": ($node) =>{
           var tree = $("#tree").jstree(true);
           console.log($node,$node.data.hasOwnProperty('TTH'));
           return {
@@ -254,19 +256,55 @@ export class Eiskaltdcpp {
     });
   }
 
+  buildTarget(id, parents){
+    for(var parent of parents){
+      if(parent != '#')
+      id= parent+'\\'+id;
+    }
+    return id;
+  }
   download(item) {
     console.log('Download', item);
     $(this.contexMenue).collapse('hide');
     this.addMagnet(item.TTH, item['Real Size'], item.Filename)
   }
 
+  remove(target) {
+    this.doQuery('queue/remove', {
+      'target': target})
+    .then(x => {
+      console.log(x.content);
+    });
+  }
+
+  setPriority(target, pri){
+    if(pri){
+      console.log(target,pri);
+      this.doQuery('queue/setpriority', {
+        'target': target,
+        'priority':Number.parseInt(pri)
+      })
+      .then(x => {
+        console.log(x.content);
+      });
+    }
+
+  }
   downloadTarget(node){
     if(node.data.hasOwnProperty('TTH')){
-      this.doQuery('list/downloadfile', {'magnet': magnet,'filelist':node.original.fileList}).then(x => {
+      this.doQuery('list/downloadfile', {
+        'target': this.buildTarget(node.id, node.parents),
+        'filelist':node.original.fileList,
+        'downloadTo':"/home/media/Downloads/"})
+      .then(x => {
         console.log(x.content);
       });
     }else{
-      this.doQuery('list/downloaddir', {'target': magnet,'filelist':node.original.fileList}).then(x => {
+      this.doQuery('list/downloaddir', {
+        'target': this.buildTarget(node.id, node.parents)+"\\",
+        'filelist':node.original.fileList,
+        'downloadTo':"/home/media/Downloads/"})
+      .then(x => {
         console.log(x.content);
       });
     }
