@@ -81,6 +81,7 @@
       "font-awesome": "npm:font-awesome@^4.5.0",
       "javascript-natural-sort": "npm:javascript-natural-sort@^0.7.1",
       "jquery": "npm:jquery@^3.1.1",
+      "jstree": "npm:jstree@^3.3.3",
       "lodash": "npm:lodash@^4.13.1",
       "text": "github:systemjs/plugin-text@^0.0.3"
     },
