@@ -39,17 +39,18 @@
               <td>${queueItem.Downloaded}</td>
               <td>${queueItem.Status}</td>
               <td>${queueItem.Priority}</td>
-              <td>${queueItem.Users}</td>
-              <td><select change.bind="setPriority(queueItem.Target,queueItem.pri)" value.bind="queueItem.pri">
-                    <option value=-1>Set Priority</option>
+              <td style="width:10%">${queueItem.Users}</td>
+              <td>
+                <select class="form-control" change.bind="setPriority(queueItem.Target,queueItem.pri)" value.bind="queueItem.pri">
+                    <option >Set Priority</option>
                     <option value=0>Paused</option>
                     <option value=2>Low</option>
                     <option value=1>Normal</option>
-
                     <option value=3>High</option>
                   </select>
+
               </td>
-              <td><button type="button" name="button" click.delegate="remove(queueItem.Target)">remove</button></td>
+              <td><button type="button" class="btn btn-danger" name="button" click.delegate="remove(queueItem.Target)">remove</button></td>
             </tr>
           </tbody>
         </table>
