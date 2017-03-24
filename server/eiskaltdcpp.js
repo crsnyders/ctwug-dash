@@ -418,7 +418,7 @@ Eiskaltdcpp.prototype.methods = function(method, action, params){
       return this.listLsDir(params['filelist'], params['directory'])
     }
     case 'downloadfile': {
-      return this.listDownloadFile(params['target'],params['filelist'],params['filelist'], params['downloadto'])
+      return this.listDownloadFile(params['target'],params['filelist'], params['downloadto'])
     }
     case 'downloaddir': {
       return this.listDownloadDir(params['target'],params['filelist'], params['downloadto'])
