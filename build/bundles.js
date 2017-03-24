@@ -35,7 +35,8 @@ module.exports = {
         "lodash",
         "javascript-natural-sort",
         "text",
-        "jquery"
+        "jquery",
+        "jstree"
       ],
       "options": {
         "inject": true,
