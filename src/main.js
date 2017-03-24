@@ -1,9 +1,20 @@
 import 'bootstrap';
 
+
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature('table')
+    .plugin('aurelia-notification', config => {
+      config.configure({
+        translate: false,  // 'true' needs aurelia-i18n to be configured
+        notifications: {
+         'success': 'humane-libnotify-success',
+         'error': 'humane-libnotify-error',
+         'info': 'humane-libnotify-info'
+          }
+        });
+    })
     .developmentLogging();
 
   //Uncomment the line below to enable animation.

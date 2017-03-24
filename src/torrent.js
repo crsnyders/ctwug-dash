@@ -1,15 +1,17 @@
 
 import {inject} from 'aurelia-framework';
 import {HttpClient as XHRClient} from 'aurelia-http-client';
+import {Notification} from 'aurelia-notification';
 import $ from  "jquery";
 import _ from "lodash";
 
-@inject(XHRClient)
+@inject(XHRClient, Notification)
 export class Torrent {
-  constructor(xhr) {
+  constructor(xhr, notification) {
     this.xhr = xhr;
     this.page=0;
     this.model = {};
+    this.notification= notification;
   }
 
 next(){
@@ -46,13 +48,13 @@ previous(){
     this.xhr.createRequest('/rest/torrent/download')
     .withContent({url: link})
     .asPost()
-    .send().catch(x =>{this.makePopup(file,"danger")}).then(x=>{this.makePopup(x.content,"success")})
+    .send()
+    .catch(x =>{
+      this.notification.error(torrent.title +" not downloaded successfully")
+    })
+    .then(x=>{
+      this.notification.success(x.content +" downloaded successfully")
+    })
   }
 
-  makePopup(file,status){
-    this.model.file = file;
-    this.model.status = status;
-    $('#downloadDialog').modal('show');
-    setTimeout(x=>{$('#downloadDialog').modal('hide');this.model ={}},1000);
-  }
 }

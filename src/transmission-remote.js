@@ -1,7 +1,6 @@
 import {inject,computedFrom} from 'aurelia-framework';
 import _ from 'lodash';
 import {HttpClient as XHRClient} from 'aurelia-http-client';
-
 import $ from "jquery";
 
 
