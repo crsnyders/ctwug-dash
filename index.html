@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CTWUG-DASH</title>
-    <link rel="stylesheet" href="jspm_packages/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="jspm_packages/npm/humane-js@3.2.2/themes/libnotify.css">
-    <link rel="stylesheet" href="styles/styles.css">
+    <meta charset="utf-8">
+    <title><%- htmlWebpackPlugin.options.metadata.title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.rawgit.com/HubSpot/pace/v1.0.0/pace.min.js" charset="utf-8" type="text/javascript"></script>
-    <link rel="stylesheet" href="styles/theme.css">
+    <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
+    <!-- imported CSS are concatenated and added automatically -->
   </head>
-
   <body aurelia-app="main">
     <div class="splash">
-      <div class="message text-center">CTWUG - DASH</div>
+      <div class="message"><%- htmlWebpackPlugin.options.metadata.title %></div>
+      <i class="fa fa-spinner fa-spin"></i>
     </div>
-
-    <script src="jspm_packages/system.js"></script>
-    <script src="config.js"></script>
-    <script>
-      System.import('aurelia-bootstrapper');
-    </script>
+    <% if (htmlWebpackPlugin.options.metadata.ENV === 'development') { %>
+    <!-- Webpack Dev Server reload -->
+    <script src="/webpack-dev-server.js"></script>
+    <% } %>
   </body>
 </html>
