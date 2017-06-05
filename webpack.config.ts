@@ -78,6 +78,9 @@ function developmentExtender(devEnv: EasyWebpackConfig) {
         overlayConfig.devServer['publicPath'] = '/dash';
         overlayConfig.devServer['compress'] = true;
         overlayConfig.devServer['clientLogLevel'] = 'info';
+        overlayConfig.devServer['historyApiFallback'] = {
+                                                        index: '/dash/'
+                                                      }; 
 
         overlayConfig.devServer['proxy'] = {
           '/rest': {
