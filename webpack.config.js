@@ -95,10 +95,12 @@ function getDevServerConfig() {
         { test: require.resolve('jquery'), loader: 'expose-loader?$!expose-loader?jQuery' },
         // embed small images and fonts as Data Urls and larger ones as files:
         { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
-        { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
-        { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
+        //{ test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
+        //{ test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
+        { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  loader: 'file-loader', query: { outputPath: '/' } },
+        { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i,  loader: 'file-loader', query: { outputPath: '/' } },
         // load these fonts normally, as files:
-        { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' query: { useRelativePath: production }},
+        { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader', query: { outputPath: '/' }},
         ...when(coverage, {
           test: /\.[jt]s$/i, loader: 'istanbul-instrumenter-loader',
           include: srcDir, exclude: [/\.{spec,test}\.[jt]s$/i],
