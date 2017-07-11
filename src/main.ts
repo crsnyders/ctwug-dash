@@ -1,19 +1,21 @@
-﻿import {Aurelia} from 'aurelia-framework';
-
+/// <reference types="aurelia-loader-webpack/src/webpack-hot-interface"/>
 import '../styles/styles.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap';
-
-
+import { Aurelia } from 'aurelia-framework';
+import { PLATFORM } from 'aurelia-pal';
 import * as Bluebird from 'bluebird';
-Bluebird.config({ warnings: false });
+
+
+// remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
+Bluebird.config({ warnings: { wForgottenReturn: false } });
 
 export async function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .feature('table')
-    .plugin('aurelia-notification', config => {
+    //https://github.com/aurelia/pal/issues/22
+    .feature(PLATFORM.moduleName('table/index'))
+    .plugin(PLATFORM.moduleName('aurelia-notification'), config => {
       config.configure({
         translate: false,  // 'true' needs aurelia-i18n to be configured
         notifications: {
@@ -25,13 +27,13 @@ export async function configure(aurelia) {
     })
     .developmentLogging();
 
-  //Uncomment the line below to enable animation.
-  //aurelia.use.plugin('aurelia-animator-css');
-  //if the css animator is enabled, add swap-order="after" to all router-view elements
+    // Uncomment the line below to enable animation.
+    // aurelia.use.plugin(PLATFORM.moduleName('aurelia-animator-css'));
+    // if the css animator is enabled, add swap-order="after" to all router-view elements
 
-  //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  //aurelia.use.plugin('aurelia-html-import-template-loader')
+    // Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
+    // aurelia.use.plugin(PLATFORM.moduleName('aurelia-html-import-template-loader'));
 
   await aurelia.start();
-  aurelia.setRoot('app');
+  await aurelia.setRoot(PLATFORM.moduleName('app'));
 }

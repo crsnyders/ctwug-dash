@@ -1,5 +1,4 @@
 import {inject} from "aurelia-framework";
-import 'isomorphic-fetch';
 import {HttpClient, json}  from "aurelia-fetch-client";
 import {Router} from "aurelia-router";
 import * as _ from "lodash";

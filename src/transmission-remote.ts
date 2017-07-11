@@ -1,7 +1,7 @@
 import {inject,computedFrom} from 'aurelia-framework';
 import * as _ from 'lodash';
 import {HttpService} from './services/http-service';
-import $ from "jquery";
+import * as $ from "jquery";
 
 
 @inject(HttpService)

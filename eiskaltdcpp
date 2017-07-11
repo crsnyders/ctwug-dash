@@ -1,0 +1,15 @@
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ../
+make -j2
+sudo make install
+
+
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DNO_UI_DAEMON=ON  -DJSONRPC_DAEMON=ON  -DUSE_CLI_JSONRPC=ON  -DUSE_MINIUPNP=ON  -DLOCAL_MINIUPNP=ON -DUSE_CLI_JSONRPC=ON
+
+
+
+/home/media/projects/dc/eiskaltdcpp/eiskaltdcpp-daemon
+/home/media/projects/eiskaltdcpp/eiskaltdcpp-daemon
+/home/media/projects/eiskaltdcpp/builddir/eiskaltdcpp-daemon
+/usr/share/doc/eiskaltdcpp-daemon
+/usr/share/lintian/overrides/eiskaltdcpp-daemon
+/usr/bin/eiskaltdcpp-daemon

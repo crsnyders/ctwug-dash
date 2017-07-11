@@ -2,7 +2,7 @@
 import {inject} from 'aurelia-framework';
 import {HttpService} from './services/http-service';
 import {Notification} from 'aurelia-notification';
-import $ from  "jquery";
+import * as $ from  "jquery";
 import * as _ from "lodash";
 
 import "humane-js/themes/libnotify.css";

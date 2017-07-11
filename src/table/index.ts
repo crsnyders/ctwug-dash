@@ -1,3 +1,5 @@
+import {PLATFORM} from 'aurelia-pal';
+
 export function configure(aurelia) {
-  aurelia.globalResources('./aurelia-table');
+  aurelia.globalResources(PLATFORM.moduleName('./aurelia-table'));
 }
