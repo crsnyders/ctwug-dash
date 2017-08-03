@@ -1,5 +1,5 @@
 const {series, crossEnv, concurrent, rimraf} = require('nps-utils')
-const {config: {port : E2E_PORT}} = require('./test/protractor.conf')
+const {config: {port: E2E_PORT}} = require('./test/protractor.conf')
 
 module.exports = {
   scripts: {
@@ -57,9 +57,8 @@ module.exports = {
         development: {
           default: series(
             'nps webpack.build.before',
-            'webpack --progress -d',
+            'webpack --progress -d'
           ),
-          preBuild:'node ./scripts/prebuild-dev-check.js',
           extractCss: series(
             'nps webpack.build.before',
             'webpack --progress -d --env.extractCss'
@@ -76,7 +75,7 @@ module.exports = {
           ),
           default: series(
             'nps webpack.build.before',
-            'webpack --progress -p --env.production --env.extractCss',
+            'webpack --progress -p --env.production --env.extractCss'
           ),
           serve: series.nps(
             'webpack.build.production',
@@ -85,9 +84,9 @@ module.exports = {
         }
       },
       server: {
-        default: `webpack-dev-server -d --devtool '#source-map' --inline --env.server`,
-        extractCss: `webpack-dev-server -d --devtool '#source-map' --inline --env.server --env.extractCss`,
-        hmr: `webpack-dev-server -d --devtool '#source-map' --inline --hot --env.server`
+        default: `webpack-dev-server -d --inline --env.server`,
+        extractCss: `webpack-dev-server -d --inline --env.server --env.extractCss`,
+        hmr: `webpack-dev-server -d --inline --hot --env.server`
       },
     },
     serve: 'http-server dist --cors',

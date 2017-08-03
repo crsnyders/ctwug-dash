@@ -6,6 +6,8 @@ export class App {
     router: Router;
   configureRouter(config: RouterConfiguration, router: Router) {
     config.title = 'CTWUG-DASH';
+    //config.options.pushState = false;
+    config.options.root = '/dash';
     config.map([
       { route: ['', 'transmission'],  name: 'transmission-remote',      moduleId: PLATFORM.moduleName('./transmission-remote'),      nav: true, title: 'Transmission' },
       { route: 'dc',                  name: 'dc',                       moduleId: PLATFORM.moduleName('./eiskaltdcpp'),      nav: true, title: 'DC++' },

@@ -15,6 +15,7 @@ resultConfig: any;
 resultTable: any;
 queuList: Array<any>;
 fileLists: Array<string>;
+fileListView: Element;
 
   constructor(private client: HttpService) {
 
@@ -182,12 +183,12 @@ fileLists: Array<string>;
   }
 
   setupJSTree(fileList) {
-    if ($('#jstree_demo_div').jstree()) {
-      $('#jstree_demo_div').jstree().destroy();
+    if ($(this.fileListView).jstree(true)) {
+      $(this.fileListView).jstree(true).destroy();
     }
-    $('#jstree_demo_div').jstree({
-      'core': {
-        'data': (obj, callback) => {
+    $(this.fileListView).jstree(<JSTreeStaticDefaults>{
+      core: {
+        data: (obj, callback) => {
           var target = this.buildTarget(obj.id,obj.parents);
 
           console.log(obj, target);
@@ -202,17 +203,19 @@ fileLists: Array<string>;
 
         }
       },
-      "plugins": [
-        "contextmenu",
-        "dnd",
+      plugins: [
         "search",
-        "state",
-        "types",
-        "wholerow"
+        "contextmenu"
       ],
-      "contextmenu": {
+      search: <JSTreeStaticDefaultsSearch>{
+        close_opened_onclear : true,
+        show_only_matches: true,
+        ajax : (str, cb, nodeId)=>{
+          console.log(str);
+        }
+      },
+      contextmenu: {
         "items": ($node) =>{
-          var tree = $("#tree").jstree(true);
           console.log($node,$node.data.hasOwnProperty('TTH'));
           return {
             "Download": {
@@ -321,5 +324,12 @@ fileLists: Array<string>;
   makeMagnet(xt, xl, dn) {
     dn = encodeURIComponent(dn);
     return `magnet:?xt=urn:tree:tiger:${xt}&xl=${xl}&dn=${dn}`;
+  }
+
+  searchTree(treeSearch){
+    if ($(this.fileListView).jstree(true)){
+    $(this.fileListView).jstree(false).search(treeSearch);
+    }
+
   }
 }

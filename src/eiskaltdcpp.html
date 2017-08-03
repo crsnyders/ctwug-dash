@@ -1,7 +1,5 @@
 <template id="eiskaltdcpp" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-<div click.delegate="clickListener($event)">
-
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -76,7 +74,8 @@
             </button>
           </li>
         </ul>
-        <div id="jstree_demo_div"></div>
+        <input type="text" class="form-control" value.bind="treeSearch" change.bind="searchTree(treeSearch)" placeholder="search">
+        <div id="jstree_demo_div" ref="fileListView"></div>
       </div>
     </div>
   </div>

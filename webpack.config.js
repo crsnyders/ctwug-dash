@@ -1,11 +1,10 @@
 var fs = require('fs');
-
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { AureliaPlugin } = require('aurelia-webpack-plugin');
-const { optimize: { CommonsChunkPlugin }, ProvidePlugin } = require('webpack')
+const { optimize: { CommonsChunkPlugin }, ProvidePlugin } = require('webpack');
 const { TsConfigPathsPlugin, CheckerPlugin } = require('awesome-typescript-loader');
 
 // config helpers:
@@ -49,12 +48,16 @@ function getDevServerConfig() {
   }
 }
 
-
+/**
+ * @return {webpack.Configuration}
+ */
   module.exports = ({production, server, extractCss, coverage} = {}) => ({
     resolve: {
       extensions: ['.ts', '.js'],
       modules: [srcDir, 'node_modules'],
     },
+
+    devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
     entry: {
       app: ['aurelia-bootstrapper'],
       vendor: ['bluebird', 'jquery', 'bootstrap'],
@@ -129,10 +132,8 @@ function getDevServerConfig() {
           title, server, baseUrl
         },
       }),
-      new CopyWebpackPlugin([{
-          from: 'styles/favicon.ico',
-          to: 'favicon.ico'
-        }
+      new CopyWebpackPlugin([
+        { from: 'static/favicon.ico', to: 'favicon.ico' }
       ]),
       ...when(extractCss, new ExtractTextPlugin({
         filename: production ? '[contenthash].css' : '[id].css',
