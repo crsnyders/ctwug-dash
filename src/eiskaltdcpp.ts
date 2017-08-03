@@ -88,7 +88,10 @@ fileListView: Element;
       if (this.results == null) {
         this.results = [];
       }
-      this.resultTable.loadData(this.results, _.get(this.results, 'length'));
+      if(this.resultTable){
+      this.resultTable.loadData(this.results, _.get(this.results, 'length'));  
+      }
+
     });
   }
 

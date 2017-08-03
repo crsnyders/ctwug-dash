@@ -1,6 +1,6 @@
 import {customElement, bindable, BindingEngine, inject,computedFrom} from "aurelia-framework";
 import * as _ from 'lodash';
-import naturalSort from 'javascript-natural-sort';
+import * as  naturalSort from 'javascript-natural-sort';
 
 
 @customElement('aurelia-table')
