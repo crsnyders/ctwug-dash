@@ -15,11 +15,14 @@
     <div role="tabpanel" class="tab-pane active" id="search">
       <div class="">
         <h2>Search</h2>
-        <div class="col-md-4">
-          <input type="text" class="form-control" name="name" placeholder="Search" value.bind="searchString" />
-        </div>
-        <button type="button" class="btn btn-default" name="button" click.delegate="search()">Search</button>
-        <button type="button" class="btn btn-default" name="button" click.delegate="clear()">Clear Search</button>
+        <form submit.delegate="search()">
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="name" placeholder="Search" value.bind="searchString" />
+          </div>
+          <button type="submit" class="btn btn-default" name="button">Search</button>
+          <button type="button" class="btn btn-default" name="button" click.delegate="clear()">Clear Search</button>
+        </form>
+
       </div>
       <hr>
       <div class="table-responsive">
@@ -54,7 +57,7 @@
         </table>
       </div>
     </div>
-    <div role="tabpanel" class="tab-pane active" id="file-lists">
+    <div role="tabpanel" class="tab-pane" id="file-lists">
       <div class="table-responsive">
         <form class="form-inline">
           <div class="form-group">
@@ -67,7 +70,7 @@
 
         <ul>
           <li repeat.for="[filelist, options] of fileListMap" >
-            <a click.delegate="openFileList(filelist)">${filelist} </a>
+            <a click.delegate="openFileList(filelist)">${stripStuff(filelist)} </a>
 
             <button type="button" class="btn btn-default">
               <span class="glyphicon ${options.opened ? 'glyphicon-folder-open' : 'glyphicon-folder-close'}" aria-hidden="true" click.delegate="toggleOpen(filelist)"></span>

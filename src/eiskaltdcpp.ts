@@ -89,7 +89,7 @@ fileListView: Element;
         this.results = [];
       }
       if(this.resultTable){
-      this.resultTable.loadData(this.results, _.get(this.results, 'length'));  
+      this.resultTable.loadData(this.results, _.get(this.results, 'length'));
       }
 
     });
@@ -184,7 +184,11 @@ fileListView: Element;
     })
 
   }
-
+  stripStuff(filelist){
+    let re = /(.*)?\.[A-Z|0-9]{39}\.xml\.bz2/
+    let matches = re.exec(filelist);
+    return matches[1]
+  }
   setupJSTree(fileList) {
     if ($(this.fileListView).jstree(true)) {
       $(this.fileListView).jstree(true).destroy();
@@ -331,7 +335,7 @@ fileListView: Element;
 
   searchTree(treeSearch){
     if ($(this.fileListView).jstree(true)){
-    $(this.fileListView).jstree(false).search(treeSearch);
+    $(this.fileListView).jstree(false).search(treeSearch,false,true);
     }
 
   }

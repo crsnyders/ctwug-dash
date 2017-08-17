@@ -31,7 +31,7 @@ export class HttpService {
     return json(body);
   }
   fetch<T>(url: string | Request, requestInit?: RequestInit): Promise<T> {
-    var promise = new Promise((resolve, reject) => {
+    var promise = new Promise<T>((resolve, reject) => {
       requestInit = _.extend(requestInit, { credentials: 'same-origin' });
       this.client.fetch(url, requestInit)
         .then((x) => {
