@@ -13,12 +13,13 @@ filterValue: number = -1;
 torrents: Array<any> = [];
 model: any;
 search: string;
+timer: NodeJS.Timer;
 
 constructor(private client: HttpService) {
 
   this.filterValue = -1;
   this.model = {};
-  setInterval(x=> {
+  this.timer= setInterval(x=> {
             this.refreshList();
         }, 5000)
 }
@@ -29,6 +30,10 @@ doQuery(path,query?){
 
   activate(){
     this.refreshList();
+  }
+
+  deactivate(){
+    clearInterval(this.timer);
   }
   refreshList(){
     this.doQuery('torrents/all').then((y)=>{console.log(y);this.torrents = y.torrents});
@@ -56,8 +61,10 @@ doQuery(path,query?){
   rowSelect(id){
     if(_.indexOf(this.selectedIds, id) != -1){
       this.selectedIds = _.remove(this.selectedIds, x=>{return x !=id;});
+      $('#'+id).removeClass('selected')
     }else{
       this.selectedIds.push(id);
+      $('#'+id).addClass('selected')
     }
   }
 

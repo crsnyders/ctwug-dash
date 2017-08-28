@@ -17,7 +17,7 @@
   <div class="results">
     <table class="table table-striped">
       <tbody>
-        <tr repeat.for="torrent of torrents" dblclick.delegate="download(torrent)">
+        <tr repeat.for="torrent of torrents">
           <td><button type="button" class="btn btn-primary" click.delegate="download(torrent)">Download</button></td>
           <td>${torrent.title | titleFormat}</td>
           <td>${torrent.content}</td>
