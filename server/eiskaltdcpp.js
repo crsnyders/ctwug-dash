@@ -471,7 +471,7 @@ Eiskaltdcpp.prototype.methods = function(method, action, params){
 }
 
 const settingTags =
-{
+[
     // Strings
     "Nick", "UploadSpeed", "Description", "DownloadDirectory", "EMail",
     "ExternalIp", "HublistServers", "HttpProxy",
@@ -534,5 +534,5 @@ const settingTags =
     "LogCmdDebug",
     // Int64
     "TotalUpload", "TotalDownload"
-};
+];
 }
