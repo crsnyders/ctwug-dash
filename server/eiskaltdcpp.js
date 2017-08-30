@@ -191,7 +191,7 @@ return this.doQuery(method)
 };
 Eiskaltdcpp.prototype.settingsGetSet = function (key, value) {
 var method = 'settings.getset';
-var params = {'key': key, 'value',value};
+var params = {'key': key, 'value':value};
 return this.doQuery(method,params)
 };
 Eiskaltdcpp.prototype.listLocal = function (separator) {
