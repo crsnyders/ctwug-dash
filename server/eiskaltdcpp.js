@@ -189,6 +189,11 @@ Eiskaltdcpp.prototype.systemDescribe = function () {
 var method = 'system.describe';
 return this.doQuery(method)
 };
+Eiskaltdcpp.prototype.settingsGetSet = function (key, value) {
+var method = 'settings.getset';
+var params = {'key': key, 'value',value};
+return this.doQuery(method,params)
+};
 Eiskaltdcpp.prototype.listLocal = function (separator) {
 var method = 'list.local';
 var params = {'separator':separator|| this.options.separator}
@@ -442,6 +447,13 @@ Eiskaltdcpp.prototype.methods = function(method, action, params){
     }
   }
   }
+  case 'settings': {
+    switch(action){
+    case 'getset': {
+      return this.getset(params['key'],params['value'])
+    }
+  }
+  }
   case 'magnet': {
     switch(action){
     case 'add': {
@@ -457,4 +469,70 @@ Eiskaltdcpp.prototype.methods = function(method, action, params){
   }
   }
 }
+
+const settingTags =
+{
+    // Strings
+    "Nick", "UploadSpeed", "Description", "DownloadDirectory", "EMail",
+    "ExternalIp", "HublistServers", "HttpProxy",
+    "LogDirectory", "LogFormatPostDownload","LogFormatPostFinishedDownload",
+    "LogFormatPostUpload", "LogFormatMainChat", "LogFormatPrivateChat",
+    "TempDownloadDirectory", "BindAddress", "SocksServer",
+    "SocksUser", "SocksPassword", "ConfigVersion", "DefaultAwayMessage",
+    "TimeStampsFormat", "CID", "LogFileMainChat", "LogFilePrivateChat",
+    "LogFileStatus", "LogFileUpload", "LogFileDownload", "LogFileFinishedDownload",
+    "LogFileSystem",
+    "LogFormatSystem", "LogFormatStatus", "LogFileSpy", "LogFormatSpy", "TLSPrivateKeyFile",
+    "TLSCertificateFile", "TLSTrustedCertificatesPath",
+    "Language", "SkipListShare", "InternetIp", "BindIfaceName",
+    "DHTKey", "DynDNSServer", "MimeHandler",
+    "LogFileCmdDebug", "LogFormatCmdDebug",
+    // Ints
+    "IncomingConnections", "InPort", "Slots", "AutoFollow",
+    "ShareHidden", "FilterMessages", "AutoSearch",
+    "AutoSearchTime", "ReportFoundAlternates", "TimeStamps",
+    "IgnoreHubPms", "IgnoreBotPms",
+    "ListDuplicates", "BufferSize", "DownloadSlots", "MaxDownloadSpeed",
+    "LogMainChat", "LogPrivateChat", "LogDownloads","LogFileFinishedDownload",
+    "LogUploads", "MinUploadSpeed", "AutoAway",
+    "SocksPort", "SocksResolve", "KeepLists", "AutoKick",
+    "CompressTransfers", "SFVCheck",
+    "MaxCompression", "NoAwayMsgToBots", "SkipZeroByte", "AdlsBreakOnFirst",
+    "HubUserCommands", "AutoSearchAutoMatch","LogSystem",
+    "LogFilelistTransfers",
+    "SendUnknownCommands", "MaxHashSpeed",
+    "GetUserCountry", "LogStatusMessages", "SearchPassiveAlways",
+    "AddFinishedInstantly", "DontDLAlreadyShared",
+    "UDPPort", "ShowLastLinesLog", "AdcDebug",
+    "SearchHistory", "SetMinislotSize",
+    "MaxFilelistSize", "HighestPrioSize", "HighPrioSize", "NormalPrioSize",
+    "LowPrioSize", "LowestPrio", "AutoDropSpeed", "AutoDropInterval",
+    "AutoDropElapsed", "AutoDropInactivity", "AutoDropMinSources",
+    "AutoDropFilesize", "AutoDropAll", "AutoDropFilelists",
+    "AutoDropDisconnect", "OutgoingConnections", "NoIpOverride", "NoUseTempDir",
+    "ShareTempFiles", "SearchOnlyFreeSlots", "LastSearchType",
+    "SocketInBuffer", "SocketOutBuffer",
+    "AutoRefreshTime", "HashingStartDelay", "UseTLS", "AutoSearchLimit",
+    "AutoKickNoFavs", "PromptPassword",
+    "DontDlAlreadyQueued", "MaxCommandLength", "AllowUntrustedHubs",
+    "AllowUntrustedClients", "TLSPort", "FastHash",
+    "SegmentedDL", "FollowLinks", "SendBloom",
+    "Coral", "SearchFilterShared", "FinishedDLOnlyFull",
+    "SearchMerge", "HashBufferSize", "HashBufferPopulate",
+    "HashBufferNoReserve", "HashBufferPrivate",
+    "UseDHT", "DHTPort",
+    "ReconnectDelay", "AutoDetectIncomingConnection",
+    "BandwidthLimitStart", "BandwidthLimitEnd", "EnableThrottle","TimeDependentThrottle",
+    "MaxDownloadSpeedAlternate", "MaxUploadSpeedAlternate",
+    "MaxDownloadSpeedMain", "MaxUploadSpeedMain",
+    "SlotsAlternateLimiting", "SlotsPrimaryLimiting", "KeepFinishedFiles",
+    "ShowFreeSlotsDesc", "UseIP", "OverLapChunks", "CaseSensitiveFilelist",
+    "IpFilter", "TextColor", "UseLua", "AllowNatt", "IpTOSValue", "SegmentSize",
+    "BindIface", "MinimumSearchInterval", "EnableDynDNS", "AllowUploadOverMultiHubs",
+    "UseADLOnlyOnOwnList", "AllowSimUploads", "CheckTargetsPathsOnStart", "NmdcDebug",
+    "ShareSkipZeroByte", "RequireTLS", "LogSpy", "AppUnitBase",
+    "LogCmdDebug",
+    // Int64
+    "TotalUpload", "TotalDownload"
+};
 }
