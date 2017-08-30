@@ -450,7 +450,7 @@ Eiskaltdcpp.prototype.methods = function(method, action, params){
   case 'settings': {
     switch(action){
     case 'getset': {
-      return this.getset(params['key'],params['value'])
+      return this.settingsGetSet(params['key'],params['value'])
     }
   }
   }
