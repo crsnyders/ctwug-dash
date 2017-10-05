@@ -213,7 +213,8 @@ fileListView: Element;
       },
       plugins: [
         "search",
-        "contextmenu"
+        "contextmenu",
+        "types"
       ],
       search: <JSTreeStaticDefaultsSearch>{
         close_opened_onclear : true,
