@@ -203,6 +203,7 @@ fileListView: Element;
             .then(items => {
             for (var i = 0; i < items.length; i++) {
               items[i].id =items[i].text;
+              items[i].type = items[i].TTH ? 'file': 'dir';
             }
             console.log(items);
             callback.call(this, items)
