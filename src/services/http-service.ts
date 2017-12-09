@@ -2,10 +2,11 @@ import {inject} from "aurelia-framework";
 import {HttpClient, json}  from "aurelia-fetch-client";
 import {Router} from "aurelia-router";
 import * as _ from "lodash";
+import {Notification} from 'aurelia-notification';
 
-@inject(HttpClient, Router)
+@inject(HttpClient, Router,Notification)
 export class HttpService {
-  constructor(private client: HttpClient, private router: Router) {
+  constructor(private client: HttpClient, private router: Router, private notification: Notification) {
     client.configure(config => {
       config
         .withDefaults({
@@ -44,6 +45,7 @@ export class HttpService {
         .then((x) => {
           resolve(x);
         }).catch((x => {
+		this.notification.error(e.message)
           reject(x);
         }))
     })

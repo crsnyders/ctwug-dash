@@ -9,3 +9,8 @@ npm-debug.log*
 /release
 /test/coverage
 yarn.lock
+config.js
+run.sh
+server/list_files.js
+server/log/
+server/pid/

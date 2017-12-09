@@ -17,6 +17,7 @@
     "restify": "^4.1.1"
   },
   "dependencies": {
+    "iconv-lite": "0.4.19",
     "transmission": "^0.4.5"
   }
 }
