@@ -13,7 +13,7 @@ filterValue: number = -1;
 torrents: Array<any> = [];
 model: any;
 search: string;
-timer: NodeJS.Timer;
+timer: any;//NodeJS.Timer;
 
 constructor(private client: HttpService) {
 

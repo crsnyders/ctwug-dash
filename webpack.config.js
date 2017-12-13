@@ -41,7 +41,7 @@ function getDevServerConfig() {
     clientLogLevel: 'info',
     proxy: {
       '/rest': {
-      target: 'https://estellesnyders.ip.afrihost.co.za',
+      target: 'http://127.0.0.1:8081',
       changeOrigin: true
     }
     }

@@ -1,5 +1,6 @@
 /// <reference types="aurelia-loader-webpack/src/webpack-hot-interface"/>
 import '../styles/styles.css';
+import '../styles/libnotify.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Aurelia } from 'aurelia-framework';

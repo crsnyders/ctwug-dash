@@ -39,13 +39,17 @@ export class HttpService {
           if (x.ok) {
             return x.json()
           }else {
-            reject(x);
+            x.text().then((message)=>{
+              this.notification.error(message);
+            });
+            throw x;
           }
         })
         .then((x) => {
           resolve(x);
-        }).catch((x => {
-		this.notification.error(e.message)
+        })
+        .catch((x => {
+
           reject(x);
         }))
     })

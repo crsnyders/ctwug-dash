@@ -5,8 +5,6 @@ import {Notification} from 'aurelia-notification';
 import * as $ from  "jquery";
 import * as _ from "lodash";
 
-import "humane-js/themes/libnotify.css";
-
 @inject(HttpService, Notification)
 export class TorrentPage {
   pages: any=0;
