@@ -1,0 +1,107 @@
+<template id="profile">
+<div class="container" id="profile">
+  <md-card md-title="Profile">
+    <div class="container">
+      <div class="row">
+
+
+        <div class="col s6">
+          <div class="">
+            <md-progress md-type="circular" md-size="small" if.bind="!currentUserInfo"></md-progress>
+            <img src="${currentUserInfo.avatarUrl}" width="150px" class="circle responsive-img z-depth-1" click.delegate=changeAvatar()>
+            <md-progress md-type="circular" md-size="large" if.bind="imageUploading"></md-progress>
+          </div>
+          <div class="">
+            <label for="first_name">First Name</label>
+            <div id="first_name">${currentUserInfo.firstName}</div>
+            <md-progress md-type="circular" md-size="small" if.bind="!currentUserInfo"></md-progress>
+          </div>
+          <div class="">
+            <label for="last_name">Last Name</label>
+            <div id="last_name">${currentUserInfo.lastName}</div>
+            <md-progress md-type="circular" md-size="small" if.bind="!currentUserInfo"></md-progress>
+          </div>
+          <div class="">
+            <label for="email">Email</label>
+            <div id="email">${currentUser.email}</div>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="">
+            <label for="bio">About me</label>
+            <div id="bio">${currentUserInfo.bio}</div>
+            <md-progress md-type="circular" md-size="small" if.bind="!currentUserInfo"></md-progress>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fixed-action-btn  click-to-toggle">
+      <a ref="tap" class="btn-floating btn-large red "ref="optionsButton" >
+        <i class="large material-icons">menu</i>
+      </a>
+      <ul>
+        <li><a  class="btn-floating red" click.delegate="editProfile()" md-tooltip="position: left; text: Update profile;"><i class="large material-icons">edit</i></a></li>
+        <li><a class="btn-floating red" click.delegate="changePassword()" md-tooltip="position: left; text: Update password;"><i class="material-icons">lock_outline</i></a></li>
+      </ul>
+    </div>
+    <div class="fixed-action-btn click-to-toggle">
+        <ul>
+          <li><a class="btn-floating red" click.delegate="addReading()"><i class="large material-icons">add</i></a></li>
+        </ul>
+      </div>
+
+    <div id="updateDetails" md-modal md-modal.ref="updateDetails">
+      <div class="modal-content">
+        <md-colors></md-colors>
+        <h4>Update details</h4>
+        <div>
+          <md-input md-blur-on-enter="true" md-label="First Name" md-placeholder="First Name" md-validate="true" value.bind="currentUserInfo.firstName & validate:rules">
+          </md-input>
+
+          <md-input md-blur-on-enter="true" md-label="Last Name" md-placeholder="Last Name" md-validate="true" value.bind="currentUserInfo.lastName & validate:rules">
+          </md-input>
+          <md-input md-blur-on-enter="true" md-label="About me" md-placeholder="About me" value.bind="currentUserInfo.bio" md-text-area="true">
+          </md-input>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a click.delegate="cancelEditProfile()" md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close">Cancel</a>
+        <a click.delegate="updateUserInfo()" md-button="flat: true;" md-waves="color: accent;" class="modal-action  modal-close" disabled.bind="controller.errors.length" md-wait-cursor.bind="loading">Ok</a>
+      </div>
+    </div>
+    <div id="passwordUpdate" md-modal md-modal.ref="passwordUpdate">
+      <div class="modal-content">
+        <md-colors></md-colors>
+        <h4>Update password</h4>
+        <div>
+          <md-input md-type="password" md-blur-on-enter="true" md-placeholder="Current Password" md-label="Current Password" md-validate="true" md-value.bind="currentPassword & validate:rules">
+          </md-input>
+          <md-input md-type="password" md-blur-on-enter="true" md-placeholder="New Password" md-label="New Password" md-validate="true" md-value.bind="newPassword & validate:rules">
+          </md-input>
+          <md-input md-type="password" md-blur-on-enter="true" md-placeholder="Confirm Password" md-label="Confirm Password" md-validate="true" md-value.bind="confirmPassword & validate:rules">
+          </md-input>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a click.delegate="cancelPasswordUpdate()" md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close">Cancel</a>
+        <a click.delegate="updatePassword()" md-button="flat: true;" md-waves="color: accent;" class="modal-action" disabled.bind="controller.errors.length" md-wait-cursor.bind="loading">Ok</a>
+      </div>
+    </div>
+    <div id="changeAvatarModal" md-modal md-modal.ref="changeAvatarModal">
+      <div class="modal-content">
+        <md-colors></md-colors>
+        <h4>Change avatar</h4>
+        <div>
+          <md-file md-caption="upload file" view-model.ref="fileInput" md-label-value.bind="labelValue"></md-file>
+          <div if.bind="selectedFile">
+            selected file: ${selectedFile.name} (${selectedFile.size} bytes)
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a click.delegate="cancelChangeAvatar()" md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close">Cancel</a>
+        <a click.delegate="updateAvatar()" md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close">Ok</a>
+      </div>
+    </div>
+</template>

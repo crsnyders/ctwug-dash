@@ -1,0 +1,42 @@
+<template id="login">
+  <div class="container">
+  <md-card md-title="Sign In">
+  <div class="container">
+  <form submit.delegate="login()" validation-errors.bind="errors">
+    <div class="box">
+      <md-input
+        type="email"
+        md-blur-on-enter="true"
+        md-placeholder="Email"
+        md-label="Email"
+        md-validate="true"
+        value.bind="email & validate:rules"
+        autocomplete="email"
+        >
+      </md-input>
+
+      <md-input
+        type="password"
+        md-blur-on-enter="true"
+        md-placeholder="Password"
+        md-label="Password"
+        md-validate="true"
+        value.bind="password & validate:rules"
+        autocomplete="current-password"
+        >
+      </md-input>
+
+      <div class="center-align">
+        <button class="btn waves-effect waves-light green" type="button" click.trigger="signUp()" >Sign Up</button>
+        <button class="btn waves-effect waves-light blue" type="submit" disabled.bind="errors.length"  md-wait-cursor.bind="loading">Sign In</button>
+      </div>
+    </div>
+    <!-- End Box -->
+
+  </form>
+
+  <p class="center-align">Forgot your password? <a style="color:#f1c40f;" click.trigger="recoverPassword()">Click Here!</a></p>
+</div>
+</md-card>
+  </div>
+</template>

@@ -1,0 +1,72 @@
+<template id="register">
+  <div class="container" id="registrationForm">
+  <md-card md-title="Taborder 3 Warriors - Register" if.bind="!verificationSent">
+    <div class="container">
+      <form submit.delegate="submit()" validation-errors.bind="errors">
+        <div class="box">
+
+          <md-input
+            md-blur-on-enter="true"
+            md-label="First Name"
+            md-placeholder="First Name"
+            md-validate="true"
+            value.bind="firstName & validate:rules"
+          >
+          </md-input>
+
+          <md-input
+            md-blur-on-enter="true"
+            md-label="Last Name"
+            md-placeholder="Last Name"
+            md-validate="true"
+            value.bind="lastName & validate:rules">
+          </md-input>
+
+          <md-input
+            type="email"
+            md-blur-on-enter="true"
+            md-placeholder="Email"
+            md-label="Email"
+            md-validate="true"
+            value.bind="email & validate:rules">
+          </md-input>
+
+          <md-input
+            type="password"
+            md-blur-on-enter="true"
+            md-placeholder="Password"
+            md-label="Password"
+            md-validate="true"
+            value.bind="password & validate:rules">
+          </md-input>
+
+          <md-input
+            type="password"
+            md-blur-on-enter="true"
+            md-placeholder="Confirm Password"
+            md-label="Confirm Password"
+            md-validate="true"
+            value.bind="confirmPassword & validate:rules">
+          </md-input>
+        </div>
+
+          <div class="center-align">
+            <a class="btn btn-danger" click.trigger="cancel()">Cancel</a>
+            <button class="btn btn-primary" type="submit" disabled.bind="errors.length" md-wait-cursor.bind="loading">Sign me Up Scotty!</button>
+          </div>
+        </div>
+        <!-- End Box -->
+
+      </form>
+    </div>
+  </md-card>
+<div class="container">
+  <md-card md-title="Taborders 3 - Register" if.bind="verificationSent">
+    <div class="container">
+      <h3>Verification email sent to: ${email}</h3>
+    </div>
+  </md-card>
+</div>
+</div>
+
+</template>

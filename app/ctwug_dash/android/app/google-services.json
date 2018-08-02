@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "731828561868",
+    "firebase_url": "https://ctwug-dash.firebaseio.com",
+    "project_id": "ctwug-dash",
+    "storage_bucket": "ctwug-dash.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731828561868:android:0beebc5ef302244c",
+        "android_client_info": {
+          "package_name": "za.co.crsnyders.ctwugdash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731828561868-ov5jg1uo1suqdsror2hb3m8d4vc5mnjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABJkbt12tNHvYljS8Z1PFaScUW5OKmdII"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
