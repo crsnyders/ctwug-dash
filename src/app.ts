@@ -10,7 +10,6 @@ export class App {
     config.options.root = '/dash';
     config.map([
       { route: ['', 'transmission'],  name: 'transmission-remote',      moduleId: PLATFORM.moduleName('./transmission-remote'),      nav: true, title: 'Transmission' },
-      { route: 'dc',                  name: 'dc',                       moduleId: PLATFORM.moduleName('./eiskaltdcpp'),      nav: true, title: 'DC++' },
       { route: 'torrent',             name: 'torrent',                  moduleId: PLATFORM.moduleName('./torrent-page'),      nav: true, title: 'Torrents' }
     ]);
 
