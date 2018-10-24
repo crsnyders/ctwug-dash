@@ -31,6 +31,9 @@
 
 
     </div>
+    <div role="tabpanel" class="tab-pane" id="chat">
+      <div repeat.for="message of messages">${message}</div>
+    </div>
     <div role="tabpanel" class="tab-pane active" id="queue">
       <div class="table-responsive">
         <table class="table table-striped">

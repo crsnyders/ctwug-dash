@@ -14,6 +14,7 @@ opened: Array<any>;
 resultConfig: any;
 resultTable: any;
 queuList: Array<any>;
+messages: Array<string>;
 fileLists: Array<string>;
 fileListView: Element;
 
@@ -24,6 +25,7 @@ fileListView: Element;
     setInterval(x => {
       this.getSearchResults();
       this.getQueueList();
+      this.getChat();
     }, 10000)
 
     this.resultConfig = {
@@ -98,6 +100,12 @@ fileListView: Element;
   getQueueList() {
     this.doQuery('queue/list').then(x => {
       this.queuList = _.values(x.result);
+    });
+  }
+
+  getChat() {
+    this.doQuery('hub/getchat').then(x => {
+      this.messages = _.values(x.result);
     });
   }
 
